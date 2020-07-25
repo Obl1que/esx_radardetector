@@ -2,6 +2,8 @@ itemreturn = false
 detectorEnabled = false
 detectorCommandRan = false
 ESX = nil
+withinRange = false
+listOfNotifs = {}
 Citizen.CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj)
@@ -32,13 +34,18 @@ Citizen.CreateThread(function()
                 local dist = Vdist(playercoords.x, playercoords.y, playercoords.z, coords[k].x, coords[k].y, coords[k].z)
                 if dist <=  100 then
                     if IsPedInAnyVehicle(playerped) then
-                        notification("~r~Warning! Speed camera ahead!")
+                        withinRange = true
+                        notification('~r~Warning! Speed camera ahead!')
                     end
                 end
             end
         end 
         Citizen.Wait(100)
     end
+end)
+Citizen.CreateThread(function()
+
+
 end)
 RegisterNetEvent('esx_radardetector:detectorCheck')
 AddEventHandler('esx_radardetector:detectorCheck', function()
@@ -82,7 +89,7 @@ Citizen.CreateThread(function()
                 DrawMyBoy('Disabled')
             end
         end
-        Citizen.Wait(10)
+        Citizen.Wait(5)
     end
 end)
 Citizen.CreateThread(function()
@@ -118,8 +125,10 @@ RegisterCommand("detector", function()
 end)
 function notification(msg)
 	SetNotificationTextEntry("STRING")
-	AddTextComponentString(msg)
-    DrawNotification(false, false)
+    AddTextComponentSubstringPlayerName(msg)
+    local Notification = DrawNotification(false, false)
+    Citizen.Wait(300.5)
+    RemoveNotification(Notification)
 end
 function DrawTxt(x,y ,width,height,scale, text, r,g,b,a)
     SetTextFont(6)
