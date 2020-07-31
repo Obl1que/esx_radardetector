@@ -32,7 +32,7 @@ Citizen.CreateThread(function()
         if detectorEnabled then
             for k in pairs(coords) do
                 local dist = Vdist(playercoords.x, playercoords.y, playercoords.z, coords[k].x, coords[k].y, coords[k].z)
-                if dist <=  100 then
+                if dist <=  Config.distWarning then
                     if IsPedInAnyVehicle(playerped) then
                         withinRange = true
                         notification('~r~Warning! Speed camera ahead!')
@@ -42,10 +42,6 @@ Citizen.CreateThread(function()
         end 
         Citizen.Wait(100)
     end
-end)
-Citizen.CreateThread(function()
-
-
 end)
 RegisterNetEvent('esx_radardetector:detectorCheck')
 AddEventHandler('esx_radardetector:detectorCheck', function()

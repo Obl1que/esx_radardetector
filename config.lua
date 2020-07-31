@@ -9,3 +9,4 @@ Config.allRadarLocations = { -- Add all of your speed camera locations. You can 
     {x = -524.2645,y = -1776.3569,z = 21.3384},
     {x = 130.462,y = -786.304,z = 31.3}
 }
+Config.distWarning = 100 -- Distance you must be away from a speed camera for the detector to kick in. Default is 100
